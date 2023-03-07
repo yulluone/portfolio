@@ -11,6 +11,7 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "firebase-tools": "^11.24.0",
     "vue": "^3.2.45"
   },
   "devDependencies": {
