@@ -1,12 +1,7 @@
 <template>
-  <div
-    id="side"
-    :class="wrapper"
-    @pointermove="(e) => handleOnMove(e)"
-    @touchmove="(e) => handleOnMove(e.touches[0])"
-  >
+  <div id="side" :class="wrapper">
     <div :class="side">
-      <div id="left-side" :class="leftSide">
+      <div id="left-side" :class="leftSide" :style="leftSideStyle">
         <h2 :class="title2">
           <span v-if="menuIsOpen == false">I am </span>
           <span class="fancy italic font-bold text-yellow-500">
@@ -47,7 +42,15 @@ export default {
     //
   },
   name: "Home",
-  props: ["menuIsOpen", "title", "title2", "wrapper", "side", "leftSide", "p"],
+  props: [
+    "menuIsOpen",
+    "title",
+    "title2",
+    "wrapper",
+    "side",
+    "leftSide",
+    "leftSideStyle",
+  ],
   data: () => {
     return {
       // title: "title text-black ",
@@ -57,18 +60,6 @@ export default {
     };
   },
   methods: {
-    handleOnMove(e) {
-      const left = document.getElementById("left-side");
-
-      if (this.menuIsOpen == true) {
-        // left.style.width = "50%";
-        //do nothing
-      } else {
-        const p = (e.clientX / window.innerWidth) * 100;
-        left.style.width = `${p}%`;
-      }
-    },
-
     // document.ontouchmove = (e) => handleOnMove(e.touches[0]),
   },
 };
