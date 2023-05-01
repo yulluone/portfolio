@@ -1,10 +1,10 @@
 <template>
   <nav menuisOpen :class="nav">
     <div id="nav-links" :class="navLinks">
-      <NavItem href="#">Work</NavItem>
-      <NavItem href="#">About</NavItem>
-      <NavItem href="#">Contact</NavItem>
-      <NavItem href="#">Blog</NavItem>
+      <NavItem href="#" id="work">Work</NavItem>
+      <NavItem href="#" id="about">About</NavItem>
+      <NavItem href="#" id="contact">Contact</NavItem>
+      <NavItem href="#" id="blog">Blog</NavItem>
     </div>
   </nav>
 </template>
