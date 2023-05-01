@@ -21,6 +21,7 @@ export default {
       side: "side",
       menuIsOpen: false,
       where: "Home",
+      leftSideStyle: "",
     };
   },
   methods: {
@@ -28,6 +29,11 @@ export default {
       const mouseTrailer = document.getElementById("mouse-trailer");
       const x = e.clientX - mouseTrailer.offsetWidth / 2,
         y = e.clientY - mouseTrailer.offsetHeight / 2;
+      if (this.menuIsOpen == false) {
+        const leftSideWidth = (e.clientX / window.innerWidth) * 100;
+        this.leftSideStyle = `width: ${leftSideWidth}%`;
+      }
+
       const trailerKeyframes = {
         transform: `translate(${x}px, ${y}px)`,
       };
@@ -44,6 +50,7 @@ export default {
       const navigation = document.getElementById("nav");
 
       if (this.menuIsOpen == true) {
+        this.leftSideStyle = "width: 50%";
         this.leftSide =
           "side half grid place-items-center overflow-hidden absolute bg-blue-900 shadow-md shadow-black ";
         this.side = "side top-menu";
@@ -115,10 +122,22 @@ export default {
     },
     handleToggleEnter() {
       const stage = document.getElementById("stage");
+      const navigation = document.getElementById("nav");
       if (this.menuIsOpen == false) {
         const stageKeyFrames = {
           transform: "translate(0, -40px)",
         };
+        //trying to get the nav to move a bit for a preview
+        // const navKeyframes = {
+        //   opacity: "1",
+        //   transform: "translate(0, -5.5vw)",
+        // };
+
+        // navigation.animate(navKeyframes, {
+        //   duration: 500,
+        //   delay: 200,
+        //   fill: "forwards",
+        // });
 
         stage.animate(stageKeyFrames, {
           duration: 500,
@@ -168,6 +187,7 @@ export default {
         :title="title"
         :title2="title2"
         :leftSide="leftSide"
+        :leftSideStyle="leftSideStyle"
       />
     </div>
 
