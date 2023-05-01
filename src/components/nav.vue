@@ -1,34 +1,10 @@
 <template>
   <nav menuisOpen :class="nav">
     <div id="nav-links" :class="navLinks">
-      <a class="nav-link" href="#">
-        <div
-          class="nav-card aspect-video flex justify-center items-center scale bg-gray-700 shadow-2xl rounded-lg"
-        >
-          <h2 class="text-white">About</h2>
-        </div>
-      </a>
-      <a class="nav-link" href="#">
-        <div
-          class="nav-card aspect-video flex justify-center items-center bg-gray-700 shadow-2xl rounded-lg"
-        >
-          <h2 class="text-white">Work</h2>
-        </div>
-      </a>
-      <a class="nav-link" href="#">
-        <div
-          class="nav-card aspect-video flex justify-center items-center bg-gray-700 shadow-2xl scale rounded-lg"
-        >
-          <h2 class="text-white">Contact</h2>
-        </div>
-      </a>
-      <a class="nav-link" href="#">
-        <div
-          class="nav-card aspect-video flex justify-center items-center bg-gray-700 shadow-2xl rounded-lg"
-        >
-          <h2 class="text-white">Hire Me</h2>
-        </div>
-      </a>
+      <NavItem href="#">Work</NavItem>
+      <NavItem href="#">About</NavItem>
+      <NavItem href="#">Contact</NavItem>
+      <NavItem href="#">Blog</NavItem>
     </div>
   </nav>
 </template>
@@ -49,7 +25,12 @@ nav {
 }
 </style>
 <script>
+import NavItem from "./navItem.vue";
+
 export default {
+  components: {
+    NavItem,
+  },
   name: "Nav",
   props: ["menuIsOpen", "nav", "navLinks"],
 };
