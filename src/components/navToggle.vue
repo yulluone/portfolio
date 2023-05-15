@@ -1,13 +1,14 @@
 <template>
-  <button class="" @click="handleTogglMenu"></button>
+  <button class="" @click="$emit('menuToggle')"></button>
 </template>
 
 <script>
 export default {
   name: "NavToggle",
+  emits: ["menuToggle"],
   methods: {
-    handleTogglMenu() {
-      console.log("menu toggled");
+    handleToggleMenu() {
+      //
     },
   },
 };

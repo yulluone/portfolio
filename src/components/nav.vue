@@ -1,10 +1,24 @@
 <template>
   <nav menuisOpen :class="nav">
     <div id="nav-links" :class="navLinks">
-      <NavItem href="#" id="work">Work</NavItem>
-      <NavItem href="#" id="about">About</NavItem>
-      <NavItem href="#" id="contact">Contact</NavItem>
-      <NavItem href="#" id="blog">Blog</NavItem>
+      <!-- <NavItem href="#" id="work" @itemHover="(id) => handleItemHover(id)"
+        >Work</NavItem
+      >
+      <NavItem href="#" id="about" @itemHover="(id) => handleItemHover(id)"
+        >About</NavItem
+      >
+      <NavItem href="#" id="contact" @itemHover="(id) => handleItemHover(id)"
+        >Contact</NavItem
+      >
+      <NavItem href="#" id="blog" @itemHover="(id) => handleItemHover(id)"
+        >Blog</NavItem
+      > -->
+      <NavItem
+        v-for="navItem in navItems"
+        :id="navItem"
+        @itemHover="(navItem) => $emit('navHover', navItem)"
+        >{{ navItem }}</NavItem
+      >
     </div>
   </nav>
 </template>
@@ -31,7 +45,18 @@ export default {
   components: {
     NavItem,
   },
+  data() {
+    return {
+      //
+    };
+  },
   name: "Nav",
-  props: ["menuIsOpen", "nav", "navLinks"],
+  props: ["menuIsOpen", "nav", "navLinks", "navItems"],
+  emits: ["navHover"],
+  methods: {
+    handleItemHover(id) {
+      console.log(id);
+    },
+  },
 };
 </script>

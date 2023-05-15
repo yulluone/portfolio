@@ -2,11 +2,19 @@
 import Nav from "./components/nav.vue";
 import Home from "./components/home.vue";
 import NavToggle from "./components/navToggle.vue";
+import Work from "./components/work.vue";
+import About from "./components/about.vue";
+import Contact from "./components/contact.vue";
+import Blog from "./components/blog.vue";
 
 export default {
   components: {
     Nav,
     Home,
+    Work,
+    About,
+    Contact,
+    Blog,
     NavToggle,
   },
   data: () => {
@@ -22,6 +30,7 @@ export default {
       menuIsOpen: false,
       where: "Home",
       leftSideStyle: "",
+      navItems: ["Work", "About", "Contact", "Blog"],
     };
   },
   methods: {
@@ -48,6 +57,7 @@ export default {
       console.log("menu open is:", this.menuIsOpen);
       const navToggle = document.getElementById("nav-toggle");
       const navigation = document.getElementById("nav");
+      const stage = document.getElementById("stage");
 
       if (this.menuIsOpen == true) {
         this.leftSideStyle = "width: 50%";
@@ -60,6 +70,10 @@ export default {
         this.nav = "fixed bottom-0 h-1/3 w-full left-0";
         this.navLinks = "flex scale-100 items-center justify-center";
 
+        const stageKeyFrames = {
+          transform: "translateY(-15vw)",
+          opacity: "0.5",
+        };
         const navKeyframes = {
           opacity: "1",
           transform: "translate(0, -12.5vw)",
@@ -75,6 +89,11 @@ export default {
           opacity: "0.5",
           scale: "0.5",
         };
+
+        stage.animate(stageKeyFrames, {
+          duration: 500,
+          fill: "forwards",
+        });
 
         navigation.animate(navKeyframes, {
           duration: 500,
@@ -158,6 +177,9 @@ export default {
         fill: "forwards",
       });
     },
+    handleNavHover(navItem) {
+      this.where = navItem;
+    },
   },
 
   // computed: {
@@ -189,14 +211,20 @@ export default {
         :leftSide="leftSide"
         :leftSideStyle="leftSideStyle"
       />
+
+      <Work v-if="where == 'Work'" />
+      <About v-if="where == 'About'" />
+      <Contact v-if="where == 'Contact'" />
+      <Blog v-if="where == 'Blog'" />
     </div>
 
+    <!-- NOTE: move all events to child, use emits -->
     <div
       class="fixed bg-yellow-500 rounded-full w-14 h-14 left-1/2 bottom-12 border-8 border-blue-700 shadow-md shadow-black cursor-pointer hover:scale-125 active:scale-75 ease-in-out duration-300"
       id="nav-toggle"
       @click="handleToggleMenu"
       @mouseenter="handleToggleEnter"
-      @mouseleave="handleToggleLeave"
+      @mouseleave=""
     >
       <NavToggle />
     </div>
@@ -207,6 +235,8 @@ export default {
         :menuIsOpen="menuIsOpen"
         :nav="nav"
         :navLinks="navLinks"
+        :navItems="navItems"
+        @navHover="(navItem) => handleNavHover(navItem)"
       />
     </div>
   </div>

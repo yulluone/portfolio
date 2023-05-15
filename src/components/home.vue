@@ -112,10 +112,7 @@ export default {
   z-index: 150;
 }
 
-.top-menu {
-  transform: translateY(-15vw);
-  opacity: 0.5;
-}
+
 
 .menu-title {
   transform: translate(55%, 50%);
