@@ -19,6 +19,25 @@ export default {
   },
   data: () => {
     return {
+      projects: [
+        {
+          name: "The Safe House",
+          description: "A platform for spreading mental health awareness.",
+        },
+        {
+          name: "Edemy",
+          description:
+            "An E-Learning Marketplace where students can buy courses offered by a variety of instructors.",
+        },
+        {
+          name: "Netflix Clone",
+          description: "A rebuild of the Netflix UI",
+        },
+        {
+          name: "AirBnB Clone",
+          description: "A rebuild of the AirBnB UI",
+        },
+      ],
       leftSide:
         "side grid place-items-center overflow-hidden absolute bg-blue-900 shadow-md shadow-black ",
       title: "title text-black ",
@@ -71,12 +90,12 @@ export default {
         this.navLinks = "flex scale-100 items-center justify-center";
 
         const stageKeyFrames = {
-          transform: "translateY(-15vw)",
+          transform: "translateY(-16vw)",
           opacity: "0.5",
         };
         const navKeyframes = {
           opacity: "1",
-          transform: "translate(0, -12.5vw)",
+          transform: "translateY(-12vw)",
           // transform: "scale(100%)",
           // backgroundColor: "rgb(29 78 216 / var(--tw-border-opacity))",
           // border: "8px solid rgb(234 179 8 / var(--tw-bg-opacity))",
@@ -123,12 +142,22 @@ export default {
           opacity: "1",
           scale: "1",
         };
+        const stageKeyFrames = {
+          transform: "translateY(0)",
+          opacity: "1",
+        };
         const navKeyframes = {
           opacity: "0",
           transform: "translate(0, 80%)",
         };
+
         nav.animate(navKeyframes, {
           duration: 1,
+          fill: "forwards",
+        });
+
+        stage.animate(stageKeyFrames, {
+          duration: 500,
           fill: "forwards",
         });
 
@@ -172,13 +201,16 @@ export default {
         transform: "translate(0, 0px)",
       };
 
-      stage.animate(stageKeyFrames, {
-        duration: 500,
-        fill: "forwards",
-      });
+      if (this.menuIsOpen == false) {
+        stage.animate(stageKeyFrames, {
+          duration: 500,
+          fill: "forwards",
+        });
+      }
     },
-    handleNavHover(navItem) {
+    handleNavClick(navItem) {
       this.where = navItem;
+      this.handleToggleMenu();
     },
   },
 
@@ -193,6 +225,7 @@ export default {
 <template>
   <div
     @pointermove="(e) => handleOnMove(e)"
+    @touchmove="(e) => handleOnMove(e.targetTouches[0])"
     id="app"
     class="body m-0 bg-gray-900 cursor-default"
   >
@@ -212,7 +245,7 @@ export default {
         :leftSideStyle="leftSideStyle"
       />
 
-      <Work v-if="where == 'Work'" />
+      <Work v-if="where == 'Work'" :projects="projects" />
       <About v-if="where == 'About'" />
       <Contact v-if="where == 'Contact'" />
       <Blog v-if="where == 'Blog'" />
@@ -224,7 +257,7 @@ export default {
       id="nav-toggle"
       @click="handleToggleMenu"
       @mouseenter="handleToggleEnter"
-      @mouseleave=""
+      @mouseleave="handleToggleLeave"
     >
       <NavToggle />
     </div>
@@ -233,10 +266,12 @@ export default {
       <Nav
         v-if="menuIsOpen"
         :menuIsOpen="menuIsOpen"
+        v-bind:class="where"
         :nav="nav"
         :navLinks="navLinks"
         :navItems="navItems"
-        @navHover="(navItem) => handleNavHover(navItem)"
+        @navHover=""
+        @navClick="(navItem) => handleNavClick(navItem)"
       />
     </div>
   </div>

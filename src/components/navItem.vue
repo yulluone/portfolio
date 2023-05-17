@@ -2,13 +2,13 @@
 export default {
   name: "NavItem",
   props: ["text", "href", "id"],
-  emits: ["itemHover"],
+  emits: ["itemHover", "itemClick"],
   methods: {
     handleNavItemClick(e) {
-      console.log(e.target.id);
+      console.log("nav Item clicked", e.target.id);
+      this.$emit("itemClick", e.target.id);
     },
     handleNavItemHover(e) {
-      // $emit('itemHover', e.target.id)
       this.$emit("itemHover", e.target.id);
     },
   },
@@ -18,9 +18,8 @@ export default {
 <template>
   <a class="min-w-min" :id="id" :href="href">
     <div
-      @click="(e) => handleNavItemClick(e)"
-      @mouseover="(e) => $emit('itemHover', 'Home')"
-      @mouseleave="$emit('itemHover', 'Home')"
+      @click=""
+      @mouseover=""
       :id="id"
       class="nav-card scale-90 hover:scale-100 text-white hover:opacity-30 transition-all duration-500 hover:bg-gray-900 hover:border-blue-500 border-4 border-gray-700 aspect-video flex justify-center items-center scale shadow-2xl rounded-lg"
     >
