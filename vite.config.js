@@ -9,5 +9,5 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
   },
-  base: "/work/dev-potfolio-starter"
+  
 });
